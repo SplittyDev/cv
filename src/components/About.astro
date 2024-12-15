@@ -1,0 +1,202 @@
+---
+import linkedIn from "../assets/linkedin.svg";
+import github from "../assets/github.svg";
+import phone from "../assets/phone.svg";
+import mapPin from "../assets/map-pin.svg";
+import mail from "../assets/mail.svg";
+
+type ContactInit = {
+	icon: string;
+	text: string;
+	link?: string;
+};
+
+class Contact {
+	icon: string;
+	text: string;
+	link?: string;
+
+	constructor({ icon, text, link }: ContactInit) {
+		this.icon = icon;
+		this.text = text;
+		this.link = link;
+	}
+}
+
+type ExpertiseInit = {
+	name: string;
+	since: string;
+};
+
+class Expertise {
+	name: string;
+	since: string;
+
+	constructor({ name, since }: ExpertiseInit) {
+		this.name = name;
+		this.since = since;
+	}
+}
+
+type ExpertiseSectionInit = {
+	title: string;
+	entries: Expertise[];
+};
+
+class ExpertiseSection {
+	title: string;
+	entries: Expertise[];
+
+	constructor({ title, entries }: ExpertiseSectionInit) {
+		this.title = title;
+		this.entries = entries;
+	}
+}
+
+type LanguageInit = {
+	name: string;
+	level?: string;
+};
+
+class Language {
+	name: string;
+	level?: string;
+
+	constructor({ name, level }: LanguageInit) {
+		this.name = name;
+		this.level = level;
+	}
+}
+
+type LanguageSectionInit = {
+	title: string;
+	entries: Language[];
+};
+
+class LanguageSection {
+	title: string;
+	entries: Language[];
+
+	constructor({ title, entries }: LanguageSectionInit) {
+		this.title = title;
+		this.entries = entries;
+	}
+}
+
+const contactEntries = [
+	new Contact({
+		icon: phone.src,
+		text: "+4915120146669",
+		link: "tel:+4915120146669",
+	}),
+	new Contact({
+		icon: mail.src,
+		text: "marco@fivesheep.co",
+		link: "mailto:marco@fivesheep.co",
+	}),
+	new Contact({
+		icon: github.src,
+		text: "SplittyDev",
+		link: "https://github.com/SplittyDev",
+	}),
+	new Contact({
+		icon: linkedIn.src,
+		text: "MarcoQuinten",
+		link: "https://www.linkedin.com/in/marcoquinten",
+	}),
+	new Contact({ icon: mapPin.src, text: "Bangkok, Thailand" }),
+];
+
+const expertiseSections = [
+	new ExpertiseSection({
+		title: "Professional",
+		entries: [
+			new Expertise({ name: "Rust", since: "2022" }),
+			new Expertise({ name: "Swift", since: "2020" }),
+			new Expertise({ name: "Typescript", since: "2018" }),
+		],
+	}),
+
+	new ExpertiseSection({
+		title: "Hobbyist",
+		entries: [
+			new Expertise({ name: "C", since: "2013" }),
+			new Expertise({ name: "C#", since: "2015" }),
+			new Expertise({ name: "Python", since: "2015" }),
+			new Expertise({ name: "Javascript", since: "2016" }),
+			new Expertise({ name: "Rust", since: "2016" }),
+			new Expertise({ name: "Ruby", since: "2020" }),
+		],
+	}),
+];
+
+const languageSections = [
+	new LanguageSection({
+		title: "Fluent",
+		entries: [
+			new Language({ name: "German", level: "Native" }),
+			new Language({ name: "English", level: "≈ C2" }),
+		],
+	}),
+
+	new LanguageSection({
+		title: "Learning",
+		entries: [
+			new Language({ name: "Chinese", level: "≈ HSK-1" }),
+			new Language({ name: "Thai" }),
+		],
+	}),
+];
+---
+
+<div class="flex flex-col gap-8">
+    <section class="flex flex-col gap-2">
+        <h2 class="font-title">Contact</h2>
+        <div class="flex flex-col text-sm font-light pl-2 text-gray-700 gap-1">
+            {contactEntries.map(contact => (
+                <div class="flex flex-row gap-2 items-center">
+                    <img class="size-4" src={contact.icon} alt="Contact" />
+                    {contact.link ? (
+                        <a class="hover:underline" href={contact.link} rel="noopener noreferrer" target="_blank">{contact.text}</a>
+                    ) : (
+                        <span>{contact.text}</span>
+                    )}
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="flex flex-col gap-2">
+        <h2 class="font-title">Expertise</h2>
+        {expertiseSections.map(section => (
+            <div class="flex flex-col text-sm pl-2">
+                <h3 class="font-title font-medium text-gray-900">{section.title}</h3>
+                <div class="flex flex-col pl-2 text-gray-700 items-baseline">
+                    {section.entries.map(expertise => (
+                        <span>
+                            <span>{expertise.name}</span>
+                            <span class="text-gray-500 text-xs">since {expertise.since}</span>
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </section>
+
+    <section class="flex flex-col gap-2">
+        <h2 class="font-title">Language</h2>
+        {languageSections.map(section => (
+            <div class="flex flex-col text-sm pl-2">
+                <h3 class="font-title font-medium text-gray-900">{section.title}</h3>
+                <div class="flex flex-col pl-2 text-gray-700 items-baseline">
+                    {section.entries.map(language => (
+                        <span>
+                            <span>{language.name}</span>
+                            {language.level && <span class="text-gray-500 text-xs">{language.level}</span>}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </section>
+</div>

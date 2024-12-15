@@ -1,0 +1,100 @@
+---
+type EntryInit = {
+	years: string;
+	company: string;
+	link?: string;
+	client?: string;
+	position: string;
+	description: string;
+};
+
+class Entry {
+	years: string;
+	company: string;
+	link?: string;
+	client?: string;
+	position: string;
+	description: string;
+
+	constructor({ years, company, link, client, position, description }: EntryInit) {
+		this.years = years;
+		this.company = company;
+		this.link = link;
+		this.client = client;
+		this.position = position;
+		this.description = description;
+	}
+}
+
+const entries = [
+	new Entry({
+		years: "2024 - Current",
+		company: "FiveSheep OÜ",
+		link: "https://fivesheep.co",
+		position: "Co-Founder",
+		description: "Developing iOS and macOS apps in Swift and Rust.",
+	}),
+	new Entry({
+		years: "2023 - 2024",
+		company: "Equilibrium Group Oy",
+		link: "https://equilibrium.co",
+		client: "Aleo Network Foundation",
+		position: "Rust Blockchain Engineer",
+		description: "Helped developing the Aleo L1 blockchain node, implementing Bullshark BFT, and doing BFT consensus protocol research.",
+	}),
+	new Entry({
+		years: "2022 - 2023",
+		company: "Kraken Cryptocurrency Exchange",
+		link: "https://kraken.com",
+		position: "Rust Backend Engineer",
+		description: "Developed low-latency server applications in Rust using Protobuf and Kafka in the Core Backend Engineering team.",
+	}),
+	new Entry({
+		years: "2021 - 2022",
+		company: "Compeon GmbH",
+		link: "https://compeon.de",
+		position: "Full Stack Web",
+		description: "Developed a financial services platform, including the Ruby on Rails backend, React / Redux frontend, and cloud ops on AWS.",
+	}),
+	new Entry({
+		years: "2020 - 2021",
+		company: "Proemion GmbH",
+		link: "https://proemion.com",
+		position: "Full Stack Desktop",
+		description: "Developed a telematics desktop application including fleet management, remote vehicle maintenance, and CAN data analysis.",
+	}),
+	new Entry({
+		years: "2018 - 2020",
+		company: "Preisbörse Fulda KG",
+		link: "https://starmobile.de",
+		position: "Full Stack Web",
+		description: "Developed custom server software for automated SIM activation, maintained the website and CRM, managed a team of 3 developers.",
+	}),
+];
+---
+
+<div class="flex flex-col gap-2">
+    <h2 class="text-2xl">Work Experience</h2> 
+
+	<section class="flex flex-col gap-4">
+		{entries.map(entry => (
+			<div class="flex flex-col gap-1">
+				<div class="flex flex-col">
+					<span class="text-gray-700 font-light">{entry.years}</span>
+					<div class="flex flex-row items-baseline">
+						{entry.link ? (
+							<a class="text-lg text-gray-800 hover:underline" href={entry.link} rel="noopener noreferrer" target="_blank">{entry.company}</a>
+						) : (
+							<span class="text-lg text-gray-800">{entry.company}</span>
+						)}
+						<span class="text-lg">&nbsp;</span>
+						<span class="text text-gray-500 font-extralight">{entry.position}</span>
+					</div>
+				</div>
+				<div class="border-l-4 border-gray-400 pl-2 flex flex-col">
+					<p class="text-gray-700">{entry.description}</p>
+				</div>
+			</div>
+		))}
+	</section>
+</div>

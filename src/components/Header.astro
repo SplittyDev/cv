@@ -1,0 +1,14 @@
+---
+import avatar from '../assets/avatar.jpeg'
+---
+
+<header class="flex flex-row justify-between items-center gap-4 w-full">
+    <div class="w-[200px]">
+        <img class="size-[8rem] mx-auto rounded-[4rem] object-cover hover:rounded-md hover:scale-125 transition-all duration-300" id="avatar" src={avatar.src} alt="Avatar" />
+    </div>
+    <div class="flex flex-col gap-2 w-[calc(100%-200px)]">
+        <h1 class="text-5xl font-medium font-title text-gray-800 uppercase hover:tracking-widest transition-all duration-300">Marco Quinten</h1>
+        <h2 class="pl-[4px] text-xl font-title text-gray-500 hover:tracking-wider transition-all duration-300">Full Stack Software Engineer</h2>
+        <div class="h-[2px] bg-gray-300 w-full"></div>
+    </div>
+</header>
