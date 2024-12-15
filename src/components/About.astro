@@ -5,6 +5,18 @@ import phone from "../assets/phone.svg";
 import mapPin from "../assets/map-pin.svg";
 import mail from "../assets/mail.svg";
 
+import rust from "../assets/Rust.svg";
+import javascript from "../assets/JavaScript.svg";
+import typescript from "../assets/TypeScript.svg";
+import python from "../assets/Python.svg";
+import ruby from "../assets/Ruby.svg";
+import c from "../assets/C.svg";
+import csharp from "../assets/CS.svg";
+import swift from "../assets/Swift.svg";
+
+import { Image, type LocalImageProps } from "astro:assets";
+import type { Props } from "astro/components/ClientRouter.astro";
+
 type ContactInit = {
 	icon: string;
 	text: string;
@@ -25,15 +37,18 @@ class Contact {
 
 type ExpertiseInit = {
 	name: string;
+    image?: ImageMetadata;
 	since: string;
 };
 
 class Expertise {
 	name: string;
+    image?: ImageMetadata;
 	since: string;
 
-	constructor({ name, since }: ExpertiseInit) {
+	constructor({ name, image, since }: ExpertiseInit) {
 		this.name = name;
+        this.image = image;
 		this.since = since;
 	}
 }
@@ -111,21 +126,21 @@ const expertiseSections = [
 	new ExpertiseSection({
 		title: "Professional",
 		entries: [
-			new Expertise({ name: "Rust", since: "2022" }),
-			new Expertise({ name: "Swift", since: "2020" }),
-			new Expertise({ name: "Typescript", since: "2018" }),
+			new Expertise({ name: "Rust", image: rust, since: "2022" }),
+			new Expertise({ name: "Swift", image: swift, since: "2020" }),
+			new Expertise({ name: "Typescript", image: typescript, since: "2018" }),
 		],
 	}),
 
 	new ExpertiseSection({
 		title: "Hobbyist",
 		entries: [
-			new Expertise({ name: "C", since: "2013" }),
-			new Expertise({ name: "C#", since: "2015" }),
-			new Expertise({ name: "Python", since: "2015" }),
-			new Expertise({ name: "Javascript", since: "2016" }),
-			new Expertise({ name: "Rust", since: "2016" }),
-			new Expertise({ name: "Ruby", since: "2020" }),
+			new Expertise({ name: "C", image: c, since: "2013" }),
+			new Expertise({ name: "C#", image: csharp, since: "2015" }),
+			new Expertise({ name: "Python", image: python, since: "2015" }),
+			new Expertise({ name: "Javascript", image: javascript, since: "2016" }),
+			new Expertise({ name: "Rust", image: rust, since: "2016" }),
+			new Expertise({ name: "Ruby", image: ruby, since: "2020" }),
 		],
 	}),
 ];
@@ -166,16 +181,19 @@ const languageSections = [
         </div>
     </section>
 
-    <section class="flex flex-col gap-2">
+    <section class="flex flex-col gap-2 group transition-all">
         <h2 class="font-title">Expertise</h2>
         {expertiseSections.map(section => (
             <div class="flex flex-col text-sm pl-2">
                 <h3 class="font-title font-medium text-gray-900">{section.title}</h3>
                 <div class="flex flex-col pl-2 text-gray-700 items-baseline">
                     {section.entries.map(expertise => (
-                        <span>
-                            <span>{expertise.name}</span>
-                            <span class="text-gray-500 text-xs">since {expertise.since}</span>
+                        <span class="flex flex-row gap-1 items-center">
+                            {expertise.image && <Image class="size-[0.8rem]" src={expertise.image} alt={expertise.name} />}
+                            <div>
+                                <span>{expertise.name}</span>
+                                <span class="text-gray-500 text-xs">since {expertise.since}</span>
+                            </div>
                         </span>
                     ))}
                 </div>
