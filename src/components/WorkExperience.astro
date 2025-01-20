@@ -6,6 +6,7 @@ type EntryInit = {
 	client?: string;
 	position: string;
 	description: string;
+	languages: string[];
 };
 
 class Entry {
@@ -15,14 +16,16 @@ class Entry {
 	client?: string;
 	position: string;
 	description: string;
+	languages: string[];
 
-	constructor({ years, company, link, client, position, description }: EntryInit) {
+	constructor({ years, company, link, client, position, description, languages }: EntryInit) {
 		this.years = years;
 		this.company = company;
 		this.link = link;
 		this.client = client;
 		this.position = position;
 		this.description = description;
+		this.languages = languages;
 	}
 }
 
@@ -33,6 +36,7 @@ const entries = [
 		link: "https://fivesheep.co",
 		position: "Co-Founder",
 		description: "Developing iOS and macOS apps in Swift and Rust.",
+		languages: ['Swift', 'Rust', 'TypeScript'],
 	}),
 	new Entry({
 		years: "2023 - 2024",
@@ -41,6 +45,7 @@ const entries = [
 		client: "Aleo Network Foundation",
 		position: "Rust Blockchain Engineer",
 		description: "Helped developing the Aleo L1 blockchain node, implementing Bullshark BFT, and doing BFT consensus protocol research.",
+		languages: ['Rust'],
 	}),
 	new Entry({
 		years: "2022 - 2023",
@@ -48,6 +53,7 @@ const entries = [
 		link: "https://kraken.com",
 		position: "Rust Backend Engineer",
 		description: "Developed low-latency server applications in Rust using Protobuf and Kafka in the Core Backend Engineering team.",
+		languages: ['Rust', 'JavaScript', 'TypeScript'],
 	}),
 	new Entry({
 		years: "2021 - 2022",
@@ -55,6 +61,7 @@ const entries = [
 		link: "https://compeon.de",
 		position: "Full Stack Web",
 		description: "Developed a financial services platform, including the Ruby on Rails backend, React / Redux frontend, and cloud ops on AWS.",
+		languages: ['Ruby', 'JavaScript', 'TypeScript'],
 	}),
 	new Entry({
 		years: "2020 - 2021",
@@ -62,6 +69,7 @@ const entries = [
 		link: "https://proemion.com",
 		position: "Full Stack Desktop",
 		description: "Developed a telematics desktop application including fleet management, remote vehicle maintenance, and CAN data analysis.",
+		languages: ['Java'],
 	}),
 	new Entry({
 		years: "2018 - 2020",
@@ -69,6 +77,7 @@ const entries = [
 		link: "https://starmobile.de",
 		position: "Full Stack Web",
 		description: "Developed custom server software for automated SIM activation, maintained the website and CRM, managed a team of 3 developers.",
+		languages: ['PHP', 'JavaScript'],
 	}),
 ];
 ---
@@ -80,7 +89,7 @@ const entries = [
 		{entries.map(entry => (
 			<div class="flex flex-col gap-1 hover:translate-x-2 transition-all group">
 				<div class="flex flex-col">
-					<div class="text-gray-700 font-light group-hover:-translate-x-4 transition-all">{entry.years}</div>
+					<div class="text-sm text-gray-700 font-light group-hover:-translate-x-4 transition-all">{entry.years}</div>
 					<div class="flex flex-row items-baseline text-gray-800 group-hover:-translate-x-2 transition-all">
 						{entry.link ? (
 							<a class="text-lg hover:underline" href={entry.link} rel="noopener noreferrer" target="_blank">{entry.company}</a>
@@ -91,8 +100,13 @@ const entries = [
 						<span class="text text-gray-500 font-extralight">{entry.position}</span>
 					</div>
 				</div>
-				<div class="border-l-4 border-gray-400 pl-2 flex flex-col font-[340]">
+				<div class="border-l-4 border-gray-400 pl-2 flex flex-col gap-1 font-[340]">
 					<p class="text-gray-600">{entry.description}</p>
+					<div class="flex flex-row gap-2 text-xs">
+						{entry.languages.map(language => (
+							<div class="text-gray-500 bg-gray-100 px-2 py-1 rounded">{language}</div>
+						))}
+					</div>
 				</div>
 			</div>
 		))}
